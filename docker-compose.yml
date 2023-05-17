@@ -1,0 +1,16 @@
+version: '2'
+services:
+  postgres:
+    image: postgis/postgis:13-3.3
+    ports:
+      - 5432:5432
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /etc/timezone:/etc/timezone
+      - ./data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    environment:
+      - POSTGRES_PASSWORD=password
+    hostname: postgres
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    restart: unless-stopped
